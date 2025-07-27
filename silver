@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Kami - Silver Package</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff5f5 0%, #faf5ff 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ec4899;
+        }
+
+        .logo i {
+            color: #8b5cf6;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: #ec4899;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: url('https://placehold.co/1200x800/fdf2f8/8b5cf6?text=Love+Story') center/cover no-repeat;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(253, 242, 248, 0.8);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            text-align: center;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero-names {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ec4899, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-date {
+            font-size: 1.5rem;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .hero-message {
+            font-size: 1.2rem;
+            color: #4b5563;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Couple Section */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #6b7280;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .couple-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            align-items: center;
+        }
+
+        .couple-member {
+            text-align: center;
+        }
+
+        .couple-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            overflow: hidden;
+            border: 5px solid #fff;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .couple-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .couple-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #ec4899;
+            margin-bottom: 10px;
+        }
+
+        .couple-parents {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        /* Event Section */
+        .event {
+            background: linear-gradient(135deg, #fff5f5 0%, #faf5ff 100%);
+        }
+
+        .event-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .event-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #fdf2f8, #f5f3ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: #ec4899;
+        }
+
+        .event-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #1f2937;
+        }
+
+        .event-date {
+            font-size: 1.2rem;
+            color: #ec4899;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .event-time {
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+
+        .event-location {
+            color: #4b5563;
+            margin-bottom: 20px;
+        }
+
+        .event-map {
+            width: 100%;
+            height: 200px;
+            background: #f3f4f6;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            margin-top: 20px;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* RSVP Section */
+        .rsvp {
+            background: linear-gradient(135deg, #fff5f5 0%, #faf5ff 100%);
+        }
+
+        .rsvp-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4b5563;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ec4899;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #ec4899, #8b5cf6);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo i {
+            color: #ec4899;
+        }
+
+        .footer-text {
+            color: #d1d5db;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: #374151;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: #ec4899;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-names {
+                font-size: 2.5rem;
+            }
+
+            .hero-date {
+                font-size: 1.2rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .couple-photo {
+                width: 200px;
+                height: 200px;
+            }
+
+            .rsvp-form {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-names {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .couple-name {
+                font-size: 1.5rem;
+            }
+
+            .event-card {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        /* Floating Hearts */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(236, 72, 153, 0.7);
+            animation: float 6s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-heart"></i>
+                <span>UndanganPernikahan</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#couple">Mempelai</a></li>
+                    <li><a href="#event">Acara</a></li>
+                    <li><a href="#gallery">Galeri</a></li>
+                    <li><a href="#rsvp">RSVP</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-names animate-fade-in-up">Sarah & David</h1>
+            <p class="hero-date animate-fade-in-up delay-1">25 Desember 2024</p>
+            <p class="hero-message animate-fade-in-up delay-2">
+                Dengan penuh kasih dan suka cita, kami mengundang Bapak/Ibu/Saudara/i 
+                untuk menghadiri pernikahan kami.
+            </p>
+            <div class="animate-fade-in-up delay-3">
+                <button class="submit-btn" onclick="scrollToSection('rsvp')">
+                    Konfirmasi Kehadiran
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Couple Section -->
+    <section id="couple" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mempelai</h2>
+                <p>Ungkapan terima kasih yang tak terhingga kepada Tuhan Yang Maha Esa</p>
+            </div>
+            <div class="couple-container">
+                <div class="couple-member animate-fade-in-up">
+                    <div class="couple-photo">
+                        <img src="https://placehold.co/300x300/fdf2f8/ec4899?text=Sarah" alt="Sarah">
+                    </div>
+                    <h3 class="couple-name">Sarah Amelia</h3>
+                    <p class="couple-parents">
+                        Putri dari<br>
+                        Bapak John & Ibu Maria
+                    </p>
+                </div>
+                <div class="couple-member animate-fade-in-up delay-1">
+                    <div class="couple-photo">
+                        <img src="https://placehold.co/300x300/f5f3ff/8b5cf6?text=David" alt="David">
+                    </div>
+                    <h3 class="couple-name">David Alexander</h3>
+                    <p class="couple-parents">
+                        Putra dari<br>
+                        Bapak Robert & Ibu Jennifer
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Section -->
+    <section id="event" class="section event">
+        <div class="container">
+            <div class="section-title">
+                <h2>Jadwal Acara</h2>
+                <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami sekeluarga</p>
+            </div>
+            <div class="event-container">
+                <div class="event-card animate-fade-in-up">
+                    <div class="event-icon">
+                        <i class="fas fa-ring"></i>
+                    </div>
+                    <h3>Akad Nikah</h3>
+                    <div class="event-date">Sabtu, 25 Desember 2024</div>
+                    <div class="event-time">09:00 - 10:30 WIB</div>
+                    <div class="event-location">
+                        <i class="fas fa-map-marker-alt"></i><br>
+                        Gereja Santo Petrus<br>
+                        Jl. Merdeka No. 123, Jakarta
+                    </div>
+                    <div class="event-map">
+                        <i class="fas fa-map-marked-alt fa-2x"></i>
+                    </div>
+                </div>
+                <div class="event-card animate-fade-in-up delay-1">
+                    <div class="event-icon">
+                        <i class="fas fa-glass-cheers"></i>
+                    </div>
+                    <h3>Resepsi</h3>
+                    <div class="event-date">Sabtu, 25 Desember 2024</div>
+                    <div class="event-time">11:00 - 15:00 WIB</div>
+                    <div class="event-location">
+                        <i class="fas fa-map-marker-alt"></i><br>
+                        Gedung Serba Guna Harmoni<br>
+                        Jl. Sudirman No. 456, Jakarta
+                    </div>
+                    <div class="event-map">
+                        <i class="fas fa-map-marked-alt fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Galeri Kami</h2>
+                <p>Momen indah dalam perjalanan cinta kami</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item animate-fade-in-up">
+                    <img src="https://placehold.co/400x300/fdf2f8/ec4899?text=Pre-Wedding+1" alt="Pre-Wedding 1">
+                </div>
+                <div class="gallery-item animate-fade-in-up delay-1">
+                    <img src="https://placehold.co/400x300/f5f3ff/8b5cf6?text=Pre-Wedding+2" alt="Pre-Wedding 2">
+                </div>
+                <div class="gallery-item animate-fade-in-up delay-2">
+                    <img src="https://placehold.co/400x300/fff5f5/ec4899?text=Pre-Wedding+3" alt="Pre-Wedding 3">
+                </div>
+                <div class="gallery-item animate-fade-in-up">
+                    <img src="https://placehold.co/400x300/faf5ff/8b5cf6?text=Pre-Wedding+4" alt="Pre-Wedding 4">
+                </div>
+                <div class="gallery-item animate-fade-in-up delay-1">
+                    <img src="https://placehold.co/400x300/fdf2f8/8b5cf6?text=Pre-Wedding+5" alt="Pre-Wedding 5">
+                </div>
+                <div class="gallery-item animate-fade-in-up delay-2">
+                    <img src="https://placehold.co/400x300/f5f3ff/ec4899?text=Pre-Wedding+6" alt="Pre-Wedding 6">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp" class="section rsvp">
+        <div class="container">
+            <div class="section-title">
+                <h2>Konfirmasi Kehadiran</h2>
+                <p>Mohon konfirmasi kehadiran Anda sebelum 20 Desember 2024</p>
+            </div>
+            <div class="rsvp-form">
+                <form id="rsvpForm">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" required placeholder="Nama lengkap Anda">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="email@anda.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="attendance">Kehadiran</label>
+                        <select id="attendance" name="attendance" required>
+                            <option value="">Pilih kehadiran</option>
+                            <option value="hadir">Akan Hadir</option>
+                            <option value="tidak-hadir">Tidak Dapat Hadir</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">Jumlah Tamu</label>
+                        <select id="guests" name="guests" required>
+                            <option value="">Pilih jumlah tamu</option>
+                            <option value="1">1 Orang</option>
+                            <option value="2">2 Orang</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Pesan (Opsional)</label>
+                        <textarea id="message" name="message" placeholder="Tinggalkan pesan untuk kami"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Kirim Konfirmasi
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-heart"></i>
+                    <span>Sarah & David</span>
+                </div>
+                <p class="footer-text">
+                    Terima kasih atas doa restu dan kehadiran Anda dalam hari istimewa kami. 
+                    Cinta sejati adalah tentang menemukan seseorang yang menerima Anda sepenuhnya.
+                </p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Undangan Pernikahan Sarah & David. Dibuat dengan ❤️ menggunakan Silver Package</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Floating Hearts Animation
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const heartCount = 20;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.classList.add('heart');
+                
+                // Random position
+                const left = Math.random() * 100;
+                heart.style.left = `${left}%`;
+                
+                // Random animation delay
+                const delay = Math.random() * 5;
+                heart.style.animationDelay = `${delay}s`;
+                
+                // Random size
+                const size = 0.5 + Math.random() * 1.5;
+                heart.style.fontSize = `${size}rem`;
+                
+                container.appendChild(heart);
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        function scrollToSection(sectionId) {
+            const target = document.getElementById(sectionId);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+
+        // RSVP Form Submission
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            // In a real application, you would send this data to a server
+            console.log('RSVP Data:', data);
+            
+            // Show success message
+            alert(`Terima kasih ${data.name}! Konfirmasi kehadiran Anda telah kami terima.`);
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createFloatingHearts();
+            
+            // Add fade-in animation to elements when they come into view
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe elements with animation classes
+            document.querySelectorAll('.animate-fade-in-up').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
+            });
+        });
+
+        // Add scroll event for header shadow
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+    
+    <!-- Tambahkan di form RSVP setiap undangan -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+  // Konfigurasi Firebase Anda
+  const firebaseConfig = {
+    apiKey: "AIzaSyAjUX5OIxncAnx5NsyFVSnYDL4YnHFkPto",
+    authDomain: "undangan-a2d7b.firebaseapp.com",
+    // ... konfigurasi lainnya
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Form submission
+  document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const rsvpData = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      attendance: formData.get('attendance'),
+      guests: formData.get('guests'),
+      message: formData.get('message'),
+      timestamp: new Date()
+    };
+    
+    try {
+      await addDoc(collection(db, "rsvp"), rsvpData);
+      alert('Terima kasih! Konfirmasi Anda telah disimpan.');
+      this.reset();
+    } catch (error) {
+      alert('Maaf, terjadi kesalahan.');
+    }
+  });
+</script>
+</body>
+</html>
