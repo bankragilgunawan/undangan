@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Mempelai - Undangan Pernikahan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+            color: #fff;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .logo i {
+            color: #fbbf24;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #fbbf24;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #cbd5e1;
+            font-size: 1.2rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            margin-bottom: 40px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(251, 191, 36, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+        }
+
+        .stat-card.hadir .stat-number {
+            color: #10b981;
+        }
+
+        .stat-card.tidak-hadir .stat-number {
+            color: #ef4444;
+        }
+
+        .stat-card.mungkin .stat-number {
+            color: #f59e0b;
+        }
+
+        /* Controls */
+        .controls {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid rgba(251, 191, 36, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #fbbf24;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #fbbf24;
+            color: #1e3a8a;
+            border-color: #fbbf24;
+        }
+
+        /* RSVP List */
+        .rsvp-list {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .list-header {
+            background: rgba(251, 191, 36, 0.1);
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 100px;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .rsvp-item {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 100px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s ease;
+        }
+
+        .rsvp-item:hover {
+            background: rgba(251, 191, 36, 0.05);
+        }
+
+        .rsvp-item:last-child {
+            border-bottom: none;
+        }
+
+        .rsvp-name {
+            font-weight: 600;
+            color: #fbbf24;
+        }
+
+        .rsvp-email {
+            color: #94a3b8;
+        }
+
+        .rsvp-attendance {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .status-hadir {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .status-tidak-hadir {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .status-mungkin {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .rsvp-guests {
+            text-align: center;
+        }
+
+        .rsvp-actions {
+            text-align: center;
+        }
+
+        .action-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            color: #fbbf24;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: #fbbf24;
+            color: #1e3a8a;
+            transform: scale(1.1);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #94a3b8;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: rgba(251, 191, 36, 0.3);
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fbbf24;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .list-header, .rsvp-item {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+            
+            .list-header div:nth-child(3),
+            .list-header div:nth-child(4),
+            .rsvp-item div:nth-child(3),
+            .rsvp-item div:nth-child(4) {
+                display: none;
+            }
+            
+            .search-box {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .filter-buttons {
+                flex-direction: column;
+            }
+            
+            .filter-btn {
+                width: 100%;
+            }
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #fbbf24;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #fbbf24;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-crown"></i>
+                <span>Dashboard Mempelai</span>
+            </div>
+            <h1>Daftar Konfirmasi Tamu</h1>
+            <p class="subtitle">Pantau kehadiran tamu undangan pernikahan Anda secara real-time</p>
+        </header>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-count">0</div>
+                    <div class="stat-label">Total Konfirmasi</div>
+                </div>
+                <div class="stat-card hadir">
+                    <div class="stat-number" id="hadir-count">0</div>
+                    <div class="stat-label">Akan Hadir</div>
+                </div>
+                <div class="stat-card tidak-hadir">
+                    <div class="stat-number" id="tidak-hadir-count">0</div>
+                    <div class="stat-label">Tidak Hadir</div>
+                </div>
+                <div class="stat-card mungkin">
+                    <div class="stat-number" id="mungkin-count">0</div>
+                    <div class="stat-label">Mungkin Hadir</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Controls -->
+        <section class="controls">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Cari berdasarkan nama atau email...">
+                <button class="filter-btn active" id="filter-all">Semua</button>
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn" id="filter-hadir">Akan Hadir</button>
+                <button class="filter-btn" id="filter-tidak-hadir">Tidak Hadir</button>
+                <button class="filter-btn" id="filter-mungkin">Mungkin</button>
+                <button class="filter-btn" id="export-btn">
+                    <i class="fas fa-download"></i> Export CSV
+                </button>
+            </div>
+        </section>
+
+        <!-- RSVP List -->
+        <section class="rsvp-list">
+            <div class="list-header">
+                <div>Nama Tamu</div>
+                <div>Email</div>
+                <div>Status Kehadiran</div>
+                <div>Jumlah</div>
+            </div>
+            <div id="rsvp-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Memuat data konfirmasi...</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script type="module">
+        // Import Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAjUX5OIxncAnx5NsyFVSnYDL4YnHFkPto",
+            authDomain: "undangan-a2d7b.firebaseapp.com",
+            databaseURL: "https://undangan-a2d7b-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "undangan-a2d7b",
+            storageBucket: "undangan-a2d7b.firebasestorage.app",
+            messagingSenderId: "11688417098",
+            appId: "1:11688417098:web:7144a137b0a723406413b3"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // State
+        let rsvpList = [];
+        let filteredList = [];
+        let currentFilter = 'all';
+
+        // DOM Elements
+        const rsvpContainer = document.getElementById('rsvp-container');
+        const searchInput = document.getElementById('search-input');
+        const filterButtons = {
+            all: document.getElementById('filter-all'),
+            hadir: document.getElementById('filter-hadir'),
+            'tidak-hadir': document.getElementById('filter-tidak-hadir'),
+            mungkin: document.getElementById('filter-mungkin')
+        };
+
+        // Format date
+        function formatDate(date) {
+            if (!date) return '-';
+            if (date.toDate) {
+                return date.toDate().toLocaleDateString('id-ID');
+            }
+            return new Date(date).toLocaleDateString('id-ID');
+        }
+
+        // Render RSVP items
+        function renderRSVPList(list) {
+            if (list.length === 0) {
+                rsvpContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-users"></i>
+                        <h3>Belum Ada Konfirmasi</h3>
+                        <p>Daftar konfirmasi tamu akan muncul di sini setelah tamu mengirimkan konfirmasi kehadiran.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const html = list.map(rsvp => `
+                <div class="rsvp-item">
+                    <div>
+                        <div class="rsvp-name">${rsvp.name || '-'}</div>
+                        <div class="rsvp-email">${rsvp.email || '-'}</div>
+                    </div>
+                    <div>
+                        <div>${rsvp.phone || '-'}</div>
+                        <div>${formatDate(rsvp.timestamp)}</div>
+                    </div>
+                    <div>
+                        <div class="rsvp-attendance">
+                            <span class="status-badge status-${rsvp.attendance}">
+                                ${getAttendanceLabel(rsvp.attendance)}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="rsvp-guests">
+                        <div>${rsvp.guests || 1}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            rsvpContainer.innerHTML = html;
+        }
+
+        // Get attendance label
+        function getAttendanceLabel(status) {
+            switch(status) {
+                case 'hadir': return 'Akan Hadir';
+                case 'tidak-hadir': return 'Tidak Hadir';
+                case 'mungkin': return 'Mungkin';
+                default: return status;
+            }
+        }
+
+        // Update statistics
+        function updateStats(list) {
+            const total = list.length;
+            const hadir = list.filter(item => item.attendance === 'hadir').length;
+            const tidakHadir = list.filter(item => item.attendance === 'tidak-hadir').length;
+            const mungkin = list.filter(item => item.attendance === 'mungkin').length;
+
+            document.getElementById('total-count').textContent = total;
+            document.getElementById('hadir-count').textContent = hadir;
+            document.getElementById('tidak-hadir-count').textContent = tidakHadir;
+            document.getElementById('mungkin-count').textContent = mungkin;
+        }
+
+        // Filter list
+        function filterList() {
+            let filtered = [...rsvpList];
+
+            // Apply status filter
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(item => item.attendance === currentFilter);
+            }
+
+            // Apply search filter
+            const searchTerm = searchInput.value.toLowerCase();
+            if (searchTerm) {
+                filtered = filtered.filter(item => 
+                    (item.name && item.name.toLowerCase().includes(searchTerm)) ||
+                    (item.email && item.email.toLowerCase().includes(searchTerm))
+                );
+            }
+
+            filteredList = filtered;
+            renderRSVPList(filteredList);
+        }
+
+        // Export to CSV
+        function exportToCSV() {
+            if (rsvpList.length === 0) {
+                alert('Tidak ada data untuk diexport');
+                return;
+            }
+
+            const headers = ['Nama', 'Email', 'Telepon', 'Status Kehadiran', 'Jumlah Tamu', 'Preferensi Makanan', 'Pesan', 'Tanggal Konfirmasi'];
+            const rows = rsvpList.map(item => [
+                item.name || '',
+                item.email || '',
+                item.phone || '',
+                getAttendanceLabel(item.attendance),
+                item.guests || 1,
+                item.diet || '',
+                item.message || '',
+                formatDate(item.timestamp)
+            ]);
+
+            let csvContent = headers.join(',') + '\n';
+            rows.forEach(row => {
+                csvContent += row.map(field => `"${field}"`).join(',') + '\n';
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.setAttribute('href', url);
+            link.setAttribute('download', `rsvp-data-${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Search input
+            searchInput.addEventListener('input', filterList);
+
+            // Filter buttons
+            Object.keys(filterButtons).forEach(key => {
+                filterButtons[key].addEventListener('click', () => {
+                    // Update active state
+                    Object.values(filterButtons).forEach(btn => btn.classList.remove('active'));
+                    filterButtons[key].classList.add('active');
+                    
+                    // Set current filter
+                    currentFilter = key;
+                    
+                    // Apply filter
+                    filterList();
+                });
+            });
+
+            // Export button
+            document.getElementById('export-btn').addEventListener('click', exportToCSV);
+        }
+
+        // Initialize
+        function init() {
+            setupEventListeners();
+
+            // Real-time listener for RSVP data
+            const q = query(collection(db, "rsvp"), orderBy("timestamp", "desc"));
+            onSnapshot(q, (querySnapshot) => {
+                rsvpList = [];
+                querySnapshot.forEach((doc) => {
+                    rsvpList.push({ id: doc.id, ...doc.data() });
+                });
+                
+                filterList();
+                updateStats(rsvpList);
+            });
+        }
+
+        // Start the app
+        init();
+    </script>
+</body>
+</html>
